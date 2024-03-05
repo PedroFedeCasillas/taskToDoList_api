@@ -1,7 +1,7 @@
 import jsonwebtoken from "jsonwebtoken"
-import {config} from "dotenv"
-config()
-const { TOKEN_SECRET } = process.env;
+import dotenv from "dotenv"
+dotenv.config()
+const TOKEN_SECRET = process.env.TOKEN_SECRET;
 
 export function createAccessToken(payload){
     return new Promise((resolve, reject) => {

@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken"
-import {config} from "dotenv"
-config()
-const { TOKEN_SECRET } = process.env;
+import dotenv from "dotenv"
+dotenv.config()
+const TOKEN_SECRET = process.env.TOKEN_SECRET;
 
 
 export const authRequired = (req, res, next) => {

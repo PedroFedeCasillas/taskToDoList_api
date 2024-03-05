@@ -1,13 +1,6 @@
-import cors from "cors"
 import express from "express";
 import morgan from "morgan";
 import cookieParser from "cookie-parser";
-import { URL_LOCALHOST2 } from "./config.js"
-
-import { config } from "dotenv";
-config()
-const { URL_CLAUDINARY, URL_LOCALHOST, VITE_LOCALHOSTBACK } =  process.env;
-
 
 import authRoutes from "./Routes/auth.routes.js";
 import tasksRoutes from "./Routes/tasks.routes.js";
@@ -16,11 +9,24 @@ import calendarRoutes from "./Routes/calendar.routes.js";
 
 const app = express()
 
-app.use(cors({
-    origin: [ "http://localhost:3001", VITE_LOCALHOSTBACK, URL_CLAUDINARY, URL_LOCALHOST, URL_LOCALHOST2 ],
-    credentials: true
-    }
-))
+//TODO: Aplicar middleware necesarios
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+
+//todo: aplicar manejo de Cors para dar permisos a nuestro front
+app.use((req, res, next) => {
+    res.header("Access-Control-Allow-Origin", "*"); 
+    res.header("Access-Control-Allow-Credentials", "true"); 
+    res.header(
+      "Access-Control-Allow-Headers",
+      "Origin, X-Requested-With, Content-Type, Accept"
+    ); 
+    res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE"); 
+    next();
+  });
+  app.get("/", (req, res) => {
+    res.status(202).json({ message: "Tasks ToDoList" });
+  });
 
 app.use(morgan('dev'))
 app.use(express.json())

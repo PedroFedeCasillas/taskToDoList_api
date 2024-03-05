@@ -3,9 +3,9 @@ import User from "../Models/user.model.js"
 import bcrypt from "bcryptjs"
 import { createAccessToken } from "../Libs/jwt.js"
 import jwt from "jsonwebtoken";
-import {config} from "dotenv"
-config()
-const { TOKEN_SECRET } = process.env;
+import dotenv from "dotenv"
+dotenv.config()
+const TOKEN_SECRET = process.env.TOKEN_SECRET;
 
 //? duracion del token de sesion
 const expirationToken = 3600000;
