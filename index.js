@@ -21,12 +21,12 @@
 import app from "./src/app.js";
 import dotenv from "dotenv";
 import { connectDB } from "./src/db.js";
-import cors from "cors";
+
 
 dotenv.config();
 const PORT = process.env.PORT ||  3002;
 
-app.use(cors)
+
 connectDB()
 
 app.listen(PORT)
